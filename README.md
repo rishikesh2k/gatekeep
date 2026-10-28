@@ -51,7 +51,7 @@ A Flutter Android app for front-desk and security staff to register visitors, ge
    `name, mobile, email, visitor_type, project, purpose, status, created_at, check_in_time, check_out_time`
 
 3. Set the number of generated records to **0** so the list starts empty (or add sample data from section 5).
-4. Copy the project endpoint, for example `https://6720abcd1234.mockapi.io/api/v1`.
+4. The app uses the configured MockAPI endpoint in `lib/utils/api_constants.dart`.
 
 ### Endpoints used
 
@@ -69,7 +69,7 @@ A Flutter Android app for front-desk and security staff to register visitors, ge
 
 ### When the mock API is not connected
 
-If `API_BASE_URL` is not set, or the API can't be reached (no internet, timeout), every request is answered from `LocalDataService` instead. It keeps visitors in **shared preferences**. On first use it is seeded with four dummy visitors (`utils/dummy_visitors.dart`). Register, edit, delete and check-in/out all work and survive an app restart. The dashboard and list show a banner: *"Mock API not connected. Showing data saved on this phone."*
+If the API can't be reached (no internet, timeout), every request is answered from `LocalDataService` instead. It keeps visitors in **shared preferences**. On first use it is seeded with four dummy visitors (`utils/dummy_visitors.dart`). Register, edit, delete and check-in/out all work and survive an app restart. The dashboard and list show a banner: *"Mock API not connected. Showing data saved on this phone."*
 
 ---
 
@@ -100,17 +100,13 @@ Check-out body: `{"status": "Checked Out", "check_out_time": "2026-10-26T11:30:0
 ```bash
 flutter pub get
 
-# Option 1: pass the API URL at run time (recommended)
-flutter run --dart-define=API_BASE_URL=https://<your-id>.mockapi.io/api/v1
-
-# Option 2: edit the default value in lib/utils/api_constants.dart
 flutter run
 ```
 
 Build the APK:
 
 ```bash
-flutter build apk --release --dart-define=API_BASE_URL=https://<your-id>.mockapi.io/api/v1
+flutter build apk --release
 # output: build/app/outputs/flutter-apk/app-release.apk
 ```
 
